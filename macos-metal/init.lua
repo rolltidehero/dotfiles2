@@ -227,7 +227,7 @@ hs_bind("e", launchApp("Finder"))
 -- hs_bind("f", launchApp("Tasksboard"))
 -- chrome app
 hs_bind("g", launchApp("Gmail"))
-hs_bind("i", launchApp("iTerm"))
+hs_bind("i", launchApp("Ghostty"))
 hs_bind("m", launchApp("TextMate"))
 hs_bind("n", launchApp("Notion"))
 hs_bind("o", launchApp("Microsoft OneNote"))

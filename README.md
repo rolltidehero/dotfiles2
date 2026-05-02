@@ -16,6 +16,12 @@ bash ble-nightly/ble.sh --install ~/.local/share
 echo 'source -- ~/.local/share/blesh/ble.sh' >> ~/.bashrc
 ```
 
+### Tmux settings
+
+```
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/tmux/.tmux.conf -o ~/.tmux.conf
+```
+
 ### Vimrc Settings
 
 ```
@@ -34,6 +40,12 @@ curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/.claude/rep
 
 ```
 curl -o ~/.termux/colors.properties https://raw.githubusercontent.com/davzoku/dotfiles/master/termux/colors.properties && termux-reload-settings
+```
+
+## Ghostty Settings
+
+```
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/ghostty/config -o ~/.config/ghostty/config
 ```
 
 ### iTerm2 Theme

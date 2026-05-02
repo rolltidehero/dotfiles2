@@ -1,0 +1,35 @@
+theme = Monokai Pro
+# theme = Django
+# theme = Django Reborn Again
+background=272822
+# background-opacity = 0.9
+
+confirm-close-surface = always
+keybind = "ctrl+f=write_scrollback_file:open"
+
+
+# keybindings
+keybind = cmd+s>r=reload_config
+
+# tabs
+# keybind = cmd+s>c=new_tab
+# keybind = cmd+s>right=next_tab
+# keybind = cmd+s>left=previous_tab
+# keybind = cmd+s>comma=move_tab:-1
+# keybind = cmd+s>period=move_tab:1
+
+# split
+# keybind = cmd+s>/=new_split:right
+# keybind = cmd+s>-=new_split:down
+
+# keybind = cmd+s>h=goto_split:left
+# keybind = cmd+s>j=goto_split:bottom
+# keybind = cmd+s>k=goto_split:top
+# keybind = cmd+s>l=goto_split:right
+
+keybind = cmd+s>z=toggle_split_zoom
+
+keybind = cmd+s>e=equalize_splits
+
+# other
+copy-on-select = clipboard
