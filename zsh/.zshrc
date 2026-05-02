@@ -84,6 +84,12 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# dedupe history
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+
+source <(fzf --zsh)
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
