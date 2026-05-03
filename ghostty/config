@@ -1,8 +1,10 @@
 theme = Monokai Pro
 # theme = Django
 # theme = Django Reborn Again
+
 background=272822
 # background-opacity = 0.9
+split-divider-color =#ff073a
 
 confirm-close-surface = always
 keybind = "ctrl+f=write_scrollback_file:open"

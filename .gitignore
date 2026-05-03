@@ -3,3 +3,12 @@ desktop.ini
 # general
 .DS_Store
 *.DS_Store
+
+# backup files created by install scripts
+*.bak.*
+
+# machine-local overrides (not tracked — create these per machine)
+.shell_local
+*.local
+
+.claude

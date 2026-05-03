@@ -1,0 +1,19 @@
+# ~/.bashrc.variant — for hpc clusters
+
+# User-local bin always first (pip install --user, cargo install, etc.)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Scratch/tmp directories — override in ~/.shell_local with cluster-specific paths
+# export SCRATCH=/scratch/$USER
+# export TMPDIR=/tmp/$USER
+
+# module command — graceful fallback if not available
+if command -v module &>/dev/null; then
+  : # add 'module load' calls to ~/.shell_local instead
+fi
+
+# Add cluster-specific module loads and environment to ~/.shell_local
+# Example ~/.shell_local on HPC:
+#   module load cuda/12.0
+#   module load python/3.11
+#   export SCRATCH=/scratch/$USER

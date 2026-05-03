@@ -21,7 +21,7 @@ set hlsearch            " highlight matches
 set clipboard=unnamedplus   " use system clipboard
 set mouse=a                " enable mouse
 set scrolloff=8            " keep context when scrolling
-set nowrap                 " don’t wrap lines
+set nowrap                 " don't wrap lines
 
 " === Performance ===
 set lazyredraw
@@ -35,7 +35,7 @@ set noswapfile
 
 " === Colors ===
 set termguicolors
-colorscheme unokai
+silent! colorscheme unokai
 
 " === Leader key ===
 let mapleader=" "

@@ -1,0 +1,39 @@
+# Base essentials — install this first on any Mac before applying configs.
+# Run: brew bundle --file=macos/Brewfile
+
+tap "homebrew/bundle"
+
+# Shell & CLI essentials
+brew "git"
+brew "gnupg"
+brew "wget"
+brew "fzf"
+brew "tree"
+
+# Python tooling
+brew "uv"
+
+# Editor & multiplexer
+brew "neovim"
+brew "tmux"
+
+# Modern CLI tools
+brew "dust"       # better du
+# brew "bat"        # better cat
+# brew "eza"        # better ls
+# brew "fd"         # better find
+# brew "ripgrep"    # better grep
+# brew "git-delta"  # better git diff
+# brew "zoxide"     # smarter cd
+# brew "bottom"     # better top
+# brew "hyperfine"  # benchmarking
+
+# Desktop essentials
+cask "karabiner-elements"
+cask "hammerspoon"
+cask "rectangle"
+cask "shottr"
+cask "ghostty"
+cask "google-chrome"
+cask "raycast"
+cask "visual-studio-code"

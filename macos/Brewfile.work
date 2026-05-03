@@ -1,0 +1,30 @@
+# Work Mac extras — install after Brewfile.
+# Run: brew bundle --file=macos/Brewfile.work
+
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "aws/tap"
+tap "hashicorp/tap"
+
+# Dev tools
+brew "fzf"
+brew "git-lfs"
+brew "gnupg"
+brew "nvm"
+brew "node"
+brew "terraform"
+brew "make"
+brew "tree"
+brew "wget"
+brew "graphviz"
+brew "helm"
+brew "kubernetes-cli"
+brew "huggingface-cli"
+brew "awscli"
+brew "uv"
+brew "aws/tap/eks-node-viewer"
+brew "derailed/k9s/k9s"
+
+# Desktop apps
+cask "slack"
+cask "shottr"

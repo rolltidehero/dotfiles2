@@ -82,37 +82,23 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# hide computer name
+export DEFAULT_USER="$(whoami)"
+
+# Shared environment (PATH, EDITOR, exports)
+[[ -f ~/.shell_common.sh ]] && source ~/.shell_common.sh
+
+# Shared aliases
+[[ -f ~/.alias ]] && source ~/.alias
+
+# Machine-local overrides (not tracked in repo)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # dedupe history
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 
-source <(fzf --zsh)
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+command -v fzf &>/dev/null && source <(fzf --zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

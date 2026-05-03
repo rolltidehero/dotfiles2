@@ -1,0 +1,4 @@
+# ~/.bashrc.variant — Linux local machine
+
+# ble.sh (bash line editor) — install with: curl -L https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly.tar.xz | tar xJf - -C ~/.local/share/blesh --strip-components=1
+[[ -f ~/.local/share/blesh/ble.sh ]] && source ~/.local/share/blesh/ble.sh

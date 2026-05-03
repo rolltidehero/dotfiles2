@@ -1,0 +1,55 @@
+# Shared aliases — sourced by both zsh and bash.
+
+# git
+# alias gdev='gatsby develop'
+alias gp='git pull'
+alias gc='git clone'
+# recursively git pull sub-directories
+alias gpa='find . -name .git -print -execdir git pull \;'
+alias gs='git status'
+
+# tools
+alias d='docker'
+#alias e='exercism'
+alias jn='jupyter notebook'
+alias jl='jupyter lab'
+
+alias tf='terraform'
+alias k='kubectl'
+
+alias occ='cd ~/notes/obsidian/obsidian-nous && claude'
+alias cc='claude'
+
+alias vi='nvim'
+
+alias df-plan='code $HOME/.dotfiles'
+
+function df-apply() {
+$HOME/.dotfiles/bin/dotfiles "$@"
+case "$SHELL" in
+_/bash)
+source ~/.bashrc
+;;
+_/zsh)
+source ~/.zshrc
+;;
+\*)
+echo "Unsupported shell: $SHELL"
+;;
+esac
+}
+
+function c() {
+    code ~/code/"$1"
+}
+
+_c_complete() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    # Use 'find' to list subdirectories (one level deep) in ~/code, then extract just the basenames.
+    local dirs
+    dirs=$(find ~/code -maxdepth 1 -mindepth 1 -type d -exec basename {} \; 2>/dev/null)
+    COMPREPLY=( $(compgen -W "${dirs}" -- "$cur") )
+}
+
+# Attach the completion function to 'c'
+complete -o nospace -F _c_complete c

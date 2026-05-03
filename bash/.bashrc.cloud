@@ -1,0 +1,4 @@
+# ~/.bashrc.variant — for cloud Linux instances (EC2, GCP, Azure, DigitalOcean, etc.)
+
+# Cloud region hint (override in ~/.shell_local if needed)
+# export AWS_DEFAULT_REGION=ap-southeast-1

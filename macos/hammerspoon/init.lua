@@ -136,37 +136,63 @@ end
 function launchOrCycleApp(name)
     -- .. is concat string operator
     return function()
-        -- Check if the app is already focused
         local focusedWindow = hs.window.focusedWindow()
-        local targetApp = hs.application.get(name)
+        local frontmostApp = hs.application.frontmostApplication()
+        local targetApp = hs.appfinder.appFromName(name) or hs.application.find(name) or hs.application.get(name)
 
-        if focusedWindow and targetApp and focusedWindow:application():name() == targetApp:name() then
-            -- App is already focused, cycle through its windows
-            local appWindows = targetApp:allWindows()
+        -- Some apps expose a different runtime name than their .app name.
+        -- Example: "Visual Studio Code.app" often reports as "Code".
+        if not targetApp and frontmostApp then
+            local frontPath = frontmostApp:path() or ""
+            if frontPath:find("/" .. name .. ".app", 1, true) then
+                targetApp = frontmostApp
+            end
+        end
+
+        local isFocusedTarget = frontmostApp and targetApp and frontmostApp:pid() == targetApp:pid()
+
+        if targetApp and isFocusedTarget then
+            -- App is already focused, cycle through its windows.
+            local appWindows = {}
+
+            local orderMap = {}
+            for i, win in ipairs(hs.window.orderedWindows()) do
+                orderMap[win:id()] = i
+            end
+
+            for _, win in ipairs(targetApp:allWindows()) do
+                if win:isStandard() then
+                    table.insert(appWindows, win)
+                end
+            end
+
+            table.sort(appWindows, function(a, b)
+                local ai = orderMap[a:id()] or 999999
+                local bi = orderMap[b:id()] or 999999
+                return ai < bi
+            end)
 
             if #appWindows > 1 then
-                -- Show window titles
-                -- local windowCount = #appWindows
-                -- local windowTitles = {}
-                -- table.insert(windowTitles, 1, string.format("%d windows", windowCount))
-                -- for i = windowCount, 1, -1 do
-                --     table.insert(windowTitles, appWindows[i]:title())
-                -- end
-                -- local alertMessage = table.concat(windowTitles, "\n")
-                -- showSingleAlert(alertMessage, 1.5)
-
-                -- Focus the last window (cycles through)
-                if name == "Finder" then
-                    appWindows[#appWindows-1]:focus()
-                else
-                    appWindows[#appWindows]:focus()
+                local focusedId = focusedWindow and focusedWindow:id() or nil
+                for i, win in ipairs(appWindows) do
+                    if focusedId and win:id() == focusedId then
+                        local nextIndex = (i % #appWindows) + 1
+                        appWindows[nextIndex]:focus()
+                        return
+                    end
                 end
+
+                appWindows[1]:focus()
             end
             return
         end
 
         -- App is not focused, launch or focus it
-        path = "/Applications/" .. name .. ".app"
+        if hs.application.launchOrFocus(name) then
+            return
+        end
+
+        local path = "/Applications/" .. name .. ".app"
         if file_exists(path) then
             hs.application.launchOrFocus(path)
             return
@@ -216,6 +242,7 @@ h_bind("f", toggleFullScreen)
 hs_bind("1", launchApp("ChatGPT"))
 hs_bind("2", launchApp("Claude"))
 
+hs_bind("7", launchApp("Discord"))
 hs_bind("8", launchApp("Cursor"))
 
 hs_bind("a", launchApp("Android Studio"))
