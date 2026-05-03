@@ -49,3 +49,7 @@ if [[ "$(uname)" != "Darwin" ]]; then
     manual "~/.fzf/bin is not on PATH automatically. Add to ~/.shell_local: export PATH=\"\$HOME/.fzf/bin:\$PATH\""
   fi
 fi
+
+# Wire sourcing into existing shell configs if present
+add_source_line "$HOME/.zshrc"
+add_source_line "$HOME/.bashrc"
