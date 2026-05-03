@@ -26,7 +26,7 @@ cd ~/dotfiles
 
 #### Ubuntu
 
-Install `nvim`, `tmux`, and `fzf` on a fresh Ubuntu instance in one step:
+Install `nvim`, `tmux`, `fzf` and `bat` on a fresh Ubuntu instance in one step without sudo:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/ubuntu/install-tools.sh | bash
