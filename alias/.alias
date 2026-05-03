@@ -20,8 +20,6 @@ alias k='kubectl'
 alias occ='cd ~/notes/obsidian/obsidian-nous && claude'
 alias cc='claude'
 
-alias vi='nvim'
-
 alias df-plan='code $HOME/.dotfiles'
 
 function df-apply() {

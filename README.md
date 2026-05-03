@@ -19,18 +19,75 @@ cd ~/dotfiles
 | `personal-mac`   | macOS — full dev + personal toolset      |
 | `work-mac`       | macOS — development + work communication |
 | `personal-linux` | Linux — Ubuntu                           |
-| `cloud`            | Cloud Linux instances (EC2, GCP, Azure…) |
+| `cloud`          | Cloud Linux instances (EC2, GCP, Azure…) |
 | `hpc`            | HPC cluster (Slurm/PBS setups)           |
 
 ### One-liner install — no clone needed
+
+#### Ubuntu
+
+Install `nvim`, `tmux`, and `fzf` on a fresh Ubuntu instance in one step:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/ubuntu/install-tools.sh | bash
+```
+
+- **tmux** — via apt
+- **fzf** — via git clone to `~/.fzf`, linked to `~/.local/bin/fzf`
+- **nvim** — latest stable AppImage to `~/.local/bin/nvim`
+
+Idempotent — skips anything already installed. After running, apply your dotfiles with the curl commands above.
+
+---
+
+#### SSH
+
+##### Add your public key to a remote instance
+
+Run on the remote machine after spinning up a new instance. Idempotent — skips if your key is already present.
+
+```bash
+# Prompted interactively
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/ssh/add-pubkey.sh | bash
+
+# Or pass the key directly (useful in startup scripts)
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/ssh/add-pubkey.sh | bash -s -- "ssh-ed25519 AAAA..."
+```
+
+##### Add a host entry to your local SSH config
+
+Run locally after provisioning a new instance. Idempotent — skips if the host alias already exists.
+
+```bash
+# Interactive — prompts for any missing values
+bash ssh/add-host.sh
+
+# Or pass all args directly:
+#   bash ssh/add-host.sh <Host> <HostName> <User> [IdentityFile]
+bash ssh/add-host.sh host 1.1.1.1 ubuntu ~/.ssh/private-key
+```
+
+Produces an entry like:
+
+```
+Host host
+    HostName 1.1.1.1
+    User ubuntu
+    ServerAliveInterval 120
+    IdentityFile ~/.ssh/private-key
+```
+
+---
 
 ```bash
 BASE="https://raw.githubusercontent.com/davzoku/dotfiles/master"
 ```
 
+---
+
 Pick what you need:
 
-**Shell foundation** — install these first on any machine
+**Shell foundation** — install these to create fzf vars, and personal aliases
 
 ```bash
 curl -fsSL $BASE/shell/install.sh | bash   # ~/.shell_common.sh (PATH, fzf opts, exports)
@@ -82,18 +139,18 @@ curl -fsSL $BASE/bash/install.sh | bash -s -- cloud
 ## What's Installed Where
 
 | Component            | personal-mac | work-mac | personal-linux | cloud | hpc |
-| -------------------- | :----------: | :------: | :------------: | :-: | :-: |
-| shell (fzf, exports) |      ✓       |    ✓     |       ✓        |  ✓  |  ✓  |
-| alias                |      ✓       |    ✓     |       ✓        |  ✓  |  ✓  |
-| zsh                  |      ✓       |    ✓     |       —        |  —  |  —  |
-| bash                 |      —       |    —     |       ✓        |  ✓  |  ✓  |
-| git                  |      ✓       |    ✓     |       ✓        |  ✓  |  ✓  |
-| vim                  |      ✓       |    ✓     |       ✓        |  ✓  |  ✓  |
-| tmux                 |      ✓       |    ✓     |       ✓        |  ✓  |  ✓  |
-| nvim                 |      ✓       |    ✓     |       ✓        |  —  |  —  |
-| modern CLI tools     |   Brewfile   | Brewfile |       ✓        |  —  |  —  |
-| ghostty              |      ✓       |    —     |       —        |  —  |  —  |
-| macos                |      ✓       |    ✓     |       —        |  —  |  —  |
+| -------------------- | :----------: | :------: | :------------: | :---: | :-: |
+| shell (fzf, exports) |      ✓       |    ✓     |       ✓        |   ✓   |  ✓  |
+| alias                |      ✓       |    ✓     |       ✓        |   ✓   |  ✓  |
+| zsh                  |      ✓       |    ✓     |       —        |   —   |  —  |
+| bash                 |      —       |    —     |       ✓        |   ✓   |  ✓  |
+| git                  |      ✓       |    ✓     |       ✓        |   ✓   |  ✓  |
+| vim                  |      ✓       |    ✓     |       ✓        |   ✓   |  ✓  |
+| tmux                 |      ✓       |    ✓     |       ✓        |   ✓   |  ✓  |
+| nvim                 |      ✓       |    ✓     |       ✓        |   —   |  —  |
+| modern CLI tools     |   Brewfile   | Brewfile |       ✓        |   —   |  —  |
+| ghostty              |      ✓       |    —     |       —        |   —   |  —  |
+| macos                |      ✓       |    ✓     |       —        |   —   |  —  |
 
 Modern CLI tools: `dust` · `bat` · `eza` · `fd` · `ripgrep` · `git-delta` · `zoxide` · `bottom` · `hyperfine`
 
