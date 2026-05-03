@@ -90,10 +90,6 @@ export DEFAULT_USER="$(whoami)"
 
 # Shared aliases
 [[ -f ~/.alias ]] && source ~/.alias
-# machine specific aliases
-alias src='source ~/.zshrc'
-alias vi='nvim'
-alias cat='bat'
 
 # Machine-local overrides (not tracked in repo)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
