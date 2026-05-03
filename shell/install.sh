@@ -32,6 +32,15 @@ copy_config() {
   info "Installed $dst"
 }
 
+add_source_line() {
+  local file="$1"
+  local line='[[ -f ~/.shell_common.sh ]] && source ~/.shell_common.sh'
+  if [[ -f "$file" ]] && ! grep -qF '~/.shell_common.sh' "$file"; then
+    echo "$line" >> "$file"
+    info "Added source line to $file"
+  fi
+}
+
 copy_config "shell/common.sh" "$HOME/.shell_common.sh"
 
 # --- fzf: Mac gets it from Brewfile; install via git on Linux (no sudo, works on cloud/hpc) ---
