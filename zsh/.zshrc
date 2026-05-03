@@ -84,13 +84,16 @@ source $ZSH/oh-my-zsh.sh
 
 # hide computer name
 export DEFAULT_USER="$(whoami)"
-alias vi='nvim'
 
 # Shared environment (PATH, EDITOR, exports)
 [[ -f ~/.shell_common.sh ]] && source ~/.shell_common.sh
 
 # Shared aliases
 [[ -f ~/.alias ]] && source ~/.alias
+# machine specific aliases
+alias src='source ~/.zshrc'
+alias vi='nvim'
+alias cat='bat'
 
 # Machine-local overrides (not tracked in repo)
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

@@ -19,7 +19,7 @@ brew "tmux"
 
 # Modern CLI tools
 brew "dust"       # better du
-# brew "bat"        # better cat
+brew "bat"        # better cat
 # brew "eza"        # better ls
 # brew "fd"         # better find
 # brew "ripgrep"    # better grep

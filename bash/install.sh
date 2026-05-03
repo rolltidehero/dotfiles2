@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
 # Usage: install.sh [linux|cloud|hpc]
 VARIANT="${1:-}"
@@ -7,8 +7,13 @@ VARIANT="${1:-}"
 COMPONENT="bash"
 REPO="davzoku/dotfiles"
 BRANCH="master"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+# curl-safe: BASH_SOURCE[0] is unbound when piped; fall back to "" so
+# get_src() downloads from GitHub instead of looking for a local file.
+if [[ -n "${BASH_SOURCE[0]:-}" && -f "${BASH_SOURCE[0]}" ]]; then
+  DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+else
+  DOTFILES_DIR=""
+fi
 _TMPDIR=$(mktemp -d)
 trap 'rm -rf "$_TMPDIR"' EXIT
 
@@ -17,8 +22,10 @@ warn()   { echo "[$COMPONENT] WARN: $*"; }
 manual() { echo "[$COMPONENT] MANUAL: $*"; }
 
 get_src() {
-  local rel="$1" local_path="$DOTFILES_DIR/$rel"
-  if [[ -f "$local_path" ]]; then
+  local rel="$1"
+  local local_path=""
+  [[ -n "$DOTFILES_DIR" ]] && local_path="$DOTFILES_DIR/$rel"
+  if [[ -n "$local_path" && -f "$local_path" ]]; then
     echo "$local_path"
   else
     local tmp="$_TMPDIR/$(basename "$rel")"
