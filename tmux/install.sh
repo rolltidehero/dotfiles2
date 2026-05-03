@@ -45,3 +45,15 @@ if ! command -v tmux &>/dev/null; then
 fi
 
 copy_config "tmux/.tmux.conf" "$HOME/.tmux.conf"
+
+# Install tmux plugin manager (tpm)
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [[ ! -d "$TPM_DIR" ]]; then
+  info "Installing tmux plugin manager (tpm)..."
+  git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+  info "tpm installed to $TPM_DIR"
+else
+  info "tpm already installed at $TPM_DIR"
+fi
+
+info "Setup complete! To install plugins, run this in tmux: prefix + I (Ctrl+a + I)"
