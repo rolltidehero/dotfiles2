@@ -64,9 +64,15 @@ brew bundle --file=macos/Brewfile.work       # work Mac
 
 ## Hammerspoon
 
-`hammerspoon/init.lua` is installed for both personal and work Macs.
+`hammerspoon/init.lua` is installed for both personal and work Macs (via `macos/install.sh`, which runs `hammerspoon/install.sh`).
 
-Spoons installed automatically by `install.sh`:
+**Standalone (one line, no clone):**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/macos/hammerspoon/install.sh | bash
+```
+
+Spoons installed automatically by `hammerspoon/install.sh`:
 - [ReloadConfiguration](https://www.hammerspoon.org/Spoons/ReloadConfiguration.html) — auto-reloads config on file change
 
 To install additional Spoons manually, download from [hammerspoon.org/Spoons](https://www.hammerspoon.org/Spoons/) and unzip to `~/.hammerspoon/Spoons/`.

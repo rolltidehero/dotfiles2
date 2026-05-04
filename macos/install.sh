@@ -7,8 +7,6 @@ PROFILE="${1:-personal}"
 
 COMPONENT="macos"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SPOONS_DIR="$HOME/.hammerspoon/Spoons"
-
 info()   { echo "[$COMPONENT] $*"; }
 warn()   { echo "[$COMPONENT] WARN: $*"; }
 manual() { echo "[$COMPONENT] MANUAL: $*"; }
@@ -31,23 +29,6 @@ copy_dir() {
   mkdir -p "$dst"
   cp -r "$src/." "$dst/"
   info "Installed $dst"
-}
-
-install_spoon() {
-  local name="$1" zip_url="$2"
-  local spoon_path="$SPOONS_DIR/${name}.spoon"
-  if [[ -d "$spoon_path" ]]; then
-    info "Spoon already installed: $name"
-    return
-  fi
-  info "Installing Spoon: $name"
-  local tmp_zip
-  tmp_zip=$(mktemp /tmp/spoon-XXXXXX.zip)
-  curl -fsSL "$zip_url" -o "$tmp_zip"
-  mkdir -p "$SPOONS_DIR"
-  unzip -q "$tmp_zip" -d "$SPOONS_DIR"
-  rm -f "$tmp_zip"
-  info "Spoon installed: $spoon_path"
 }
 
 # --- Step 1: Homebrew essentials (must be installed before configs) ---
@@ -78,11 +59,8 @@ copy_dir "$SCRIPT_DIR/karabiner-elements-app" "$HOME/.config/karabiner"
 # --- Step 4: Rectangle ---
 copy_dir "$SCRIPT_DIR/rectangle-app" "$HOME/Library/Application Support/Rectangle"
 
-# --- Step 5: Hammerspoon spoons ---
-install_spoon "ReloadConfiguration" "https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ReloadConfiguration.spoon.zip"
-
-# --- Step 6: Hammerspoon config (always init.lua) ---
-copy_config "$SCRIPT_DIR/hammerspoon/init.lua" "$HOME/.hammerspoon/init.lua"
+# --- Step 5: Hammerspoon (config + Spoons; same for personal and work Macs) ---
+bash "$SCRIPT_DIR/hammerspoon/install.sh"
 
 # --- Post-install manual checklist ---
 echo ""

@@ -1,8 +1,6 @@
 # Base essentials — install this first on any Mac before applying configs.
 # Run: brew bundle --file=macos/Brewfile
 
-tap "homebrew/bundle"
-
 # Shell & CLI essentials
 brew "git"
 brew "gnupg"

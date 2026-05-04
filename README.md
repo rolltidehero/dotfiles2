@@ -38,6 +38,16 @@ curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/ubuntu/inst
 
 Idempotent — skips anything already installed. After running, apply your dotfiles with the curl commands above.
 
+#### Hammerspoon (macOS)
+
+Install `~/.hammerspoon/init.lua` and the ReloadConfiguration Spoon (idempotent). Non-macOS hosts exit successfully with no changes.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/macos/hammerspoon/install.sh | bash
+```
+
+Install the app first if needed (`brew install --cask hammerspoon`). Then open Hammerspoon and grant Accessibility permission — see [`macos/README.md`](macos/README.md).
+
 ---
 
 #### SSH
@@ -112,8 +122,9 @@ curl -fsSL $BASE/git/install.sh  | bash   # ~/.gitconfig
 **macOS**
 
 ```bash
-curl -fsSL $BASE/ghostty/install.sh        | bash   # ~/.config/ghostty/config
-curl -fsSL $BASE/macos/mac-defaults.sh     | bash   # dock speed, hidden files, etc.
+curl -fsSL $BASE/ghostty/install.sh            | bash   # ~/.config/ghostty/config
+curl -fsSL $BASE/macos/hammerspoon/install.sh  | bash   # ~/.hammerspoon/init.lua + Spoons
+curl -fsSL $BASE/macos/mac-defaults.sh         | bash   # dock speed, hidden files, etc.
 ```
 
 **Linux / remote — bash with machine variant**
@@ -151,6 +162,7 @@ curl -fsSL $BASE/bash/install.sh | bash -s -- cloud
 | modern CLI tools     |   Brewfile   | Brewfile |       ✓        |   —   |  —  |
 | ghostty              |      ✓       |    —     |       —        |   —   |  —  |
 | macos                |      ✓       |    ✓     |       —        |   —   |  —  |
+| hammerspoon          | ✓ (via macos) | ✓ (via macos) |       —        |   —   |  —  |
 
 Modern CLI tools: `dust` · `bat` · `eza` · `fd` · `ripgrep` · `git-delta` · `zoxide` · `bottom` · `hyperfine`
 

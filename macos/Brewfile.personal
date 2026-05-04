@@ -1,8 +1,6 @@
 # Personal Mac extras — install after Brewfile.
 # Run: brew bundle --file=macos/Brewfile.personal
 
-tap "homebrew/bundle"
-tap "homebrew/services"
 tap "microsoft/mssql-release"
 tap "modularml/packages"
 tap "mongodb/brew"

@@ -4,7 +4,8 @@ set -euo pipefail
 # Usage: ./bootstrap.sh <machine-type>
 # Machine types: personal-mac | work-mac | personal-linux | cloud | hpc
 #
-# Each component's install.sh is also curl-installable independently:
+# Each component's install.sh is also curl-installable independently, for example:
+#   curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/macos/hammerspoon/install.sh | bash
 #   curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/<component>/install.sh | bash
 #   curl -fsSL https://raw.githubusercontent.com/davzoku/dotfiles/master/bash/install.sh | bash -s -- cloud
 
